@@ -1,0 +1,8 @@
+
+@import url("lib/wink.css");
+
+/* default theme */
+@import url("lib/wink.default.css");
+@import url("lib/wink.default.icons.css");
+@import url("lib/wink.default.buttons.css");
+

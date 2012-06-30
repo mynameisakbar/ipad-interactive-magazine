@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;" />
+        <link rel="stylesheet" href="../../resources/css/sencha-touch.css" type="text/css">
+        <title>Ext.ux.PanelAction</title>
+        <script type="text/javascript" src="../../sencha-touch.js">
+        </script>
+        <link rel="stylesheet" href="css/Ext.ux.PanelAction.css" type="text/css">
+        <script type="text/javascript" src="Ext.ux.PanelAction.js">
+        </script>
+        <script type="text/javascript">
+            
+            Ext.setup({
+                tabletStartupScreen: 'tablet_startup.png',
+                phoneStartupScreen: 'phone_startup.png',
+                icon: 'icon.png',
+                glossOnIcon: false,
+                onReady: function(){
+                
+                    var callback = function(){
+                        alert('external callback method');
+                    }
+                    
+                    var pnlList = new Ext.Panel({
+                        floating: true,
+                        width: 350,
+                        height: 370,
+                        centered: true,
+                        modal: true,
+                        hideOnMaskTap: false,
+                        items: [{
+                            xtype: 'button',
+                            text: 'Top Left - Custom Callbacks',
+                            ui: 'confirm',
+                            handler: function(){
+                                panelLaunch({
+                                    iconClass: 'x-panel-action-icon-close',
+                                    position: 'tl',
+                                    actionMethod: [callback, function(){
+                                        alert('inline callback method');
+                                    }, 'hide']
+                                }, 'Cross Icon in Top Left.');
+                            }
+                        }, {
+                            xtype: 'button',
+                            text: 'Bottom Right',
+                            ui: 'confirm',
+                            handler: function(){
+                                panelLaunch({
+                                    iconClass: 'x-panel-action-icon-tick',
+                                    position: 'br',
+                                    actionMethod: ['hide']
+                                }, 'Tick Icon in Bottom Right.');
+                            }
+                        }, {
+                            xtype: 'button',
+                            text: 'Centre Right',
+                            ui: 'confirm',
+                            handler: function(){
+                                panelLaunch({
+                                    iconClass: 'x-panel-action-icon-tick',
+                                    position: 'cr',
+                                    actionMethod: ['hide']
+                                }, 'Tick Icon in Centre Right.');
+                            }
+                        }, {
+                            xtype: 'button',
+                            text: 'Bottom Centre',
+                            ui: 'confirm',
+                            handler: function(){
+                                panelLaunch({
+                                    iconClass: 'x-panel-action-icon-tick',
+                                    position: 'bc',
+                                    actionMethod: ['hide']
+                                }, 'Tick Icon in Bottom Centre.');
+                            }
+                        }]
+                    });
+                    pnlList.show();
+                    
+                    
+                    var panelLaunch = function(pluginConfig, panelContent){
+                        var pnl = new Ext.Panel({
+                            floating: true,
+                            width: 350,
+                            height: 370,
+                            centered: true,
+                            modal: true,
+							hideMode: 'close',
+                            hideOnMaskTap: false,
+                            layout: 'fit',
+                            html: panelContent,
+							showAnimation: {
+								type: 'pop',
+								duration: 250
+							},
+                            plugins: [new Ext.ux.PanelAction(pluginConfig)]
+                        });
+                        
+                        pnl.show();
+                    };
+                    
+                }
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
